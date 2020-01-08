@@ -1,6 +1,6 @@
 <?php
 
-require_once "../DAO/DAOUser.php";
+require __DIR__."/../DAO/DAOUser.php";
 
 class User
 {

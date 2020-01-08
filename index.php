@@ -1,7 +1,7 @@
 <?php
 require_once "./src/model/ArticleStub.php";
 require_once "./src/model/RayonStub.php";
-require_once "./src/model/UserStub.php";
+require "./src/model/UserStub.php";
 include "header.php";
 
 afficherHeader("Accueil", "");
