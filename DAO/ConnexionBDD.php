@@ -8,4 +8,3 @@ class ConnexionBDD {
         return ConnexionBDD::$pdo;
     }
 }
-?>
