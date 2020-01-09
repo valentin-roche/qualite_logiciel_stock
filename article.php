@@ -1,14 +1,13 @@
 <?php
-include './config/config.php';
 include "header.php";
 require_once DAO_ARTICLE;
 
-if(isset($_GET["idArticle"])) $idArticle = $_GET["idArticle"];
+if(isset($_GET["idArticle"])) $id = $_GET["idArticle"];
 
 $article = null;
 afficherHeader("Article", "");
 
-if($idArticle)
+if(isset($id))
 {
     $article = DAOArticle::getArticle($idArticle);
     ?>
