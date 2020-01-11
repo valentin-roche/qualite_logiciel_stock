@@ -1,6 +1,7 @@
 <?php
 
 require_once MODEL_ARTICLE;
+require_once CONNECTBDD;
 
 class DAOArticle
 {
@@ -8,7 +9,7 @@ class DAOArticle
 
     public static function getArticle($id)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('SELECT * FROM articles WHERE idArticle = :id');
         $req->bindValue(':id', $id);
@@ -21,9 +22,9 @@ class DAOArticle
 
     public static function addArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
-        $req = $bdd->prepare('INSERT INTO article(nom, description) VALUES (:nom, :description)');
+        $req = $bdd->prepare('INSERT INTO articles(nom, description) VALUES (:nom, :description)');
         $req->bindValue(':nom', $article->getName());
         $req->bindValue(':description', $article->getDescription());
 
@@ -31,11 +32,12 @@ class DAOArticle
 
         $last_id = $bdd->lastInsertId();
         $article->setId($last_id);
+        return true;
     }
 
     public static function removeArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
         $req->bindValue(':id', $article->getId());
@@ -45,7 +47,7 @@ class DAOArticle
 
     public static function updateArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('UPDATE TABLE article SET nom = :nom, description = :desc WHERE idArticle = :id');
         $req->bindValue(':nom', $article->getName());
@@ -58,7 +60,7 @@ class DAOArticle
 
     public static function getCatalog()
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('SELECT * FROM article');
 

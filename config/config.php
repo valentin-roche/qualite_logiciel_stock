@@ -16,6 +16,8 @@ define("DAO_ARTICLE", "DAO/DAOArticle.php");
 define("MODEL_ARTICLE", "model/Article.php");
 define("CONTROLLER_ARTICLE", "controller/ArticleController.php");
 
+define("CONNECTBDD", "DAO/ConnectBDD.php");
+
 
 //$dsn = 'mysql:dbname=;host=lookingpywroot.mysql.db';
 //$user = 'siteLeoPub';

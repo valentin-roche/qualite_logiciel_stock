@@ -23,7 +23,7 @@ if(isset($formNav)) {
 if($formAction and isset($_POST["name"])) {
   switch ($formAction) {
     case 'addArticle':
-      if (addArticle()) {
+      if (addArticle($_POST["name"], $_POST["desc"])) {
         echo "Succès";
       } else {
         echo "Echec";
@@ -35,10 +35,8 @@ if($formAction and isset($_POST["name"])) {
   }
 }
 
-function addArticle() {
+function addArticle($name, $desc) {
   $article = new Article();
-  $article->setName($_POST['name']);
-  $article->setDescription($_POST['desc']);
-  DAOArticle::addArticle($article)
-  return true;
+  $article->createSimple($name, $desc);
+  return DAOArticle::addArticle($article);
 }

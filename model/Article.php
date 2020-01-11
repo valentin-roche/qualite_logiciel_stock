@@ -59,6 +59,11 @@ class Article
         $this->description = $description;
     }
 
+    public function createSimple($name, $description) {
+      $this->setName($name);
+      $this->setDescription($description);
+    }
+
     public function __construct() {}
 
 
