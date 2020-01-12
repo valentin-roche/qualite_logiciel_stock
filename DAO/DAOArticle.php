@@ -17,7 +17,9 @@ class DAOArticle
         $req->execute();
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
-        return new Article($data['idArticle'], $data['nom'], $data['description']);
+        $ret = new Article();
+        $ret->create($data['idArticle'], $data['nom'], $data['description']);
+        return $ret;
     }
 
     public static function addArticle(Article $article)
@@ -32,7 +34,7 @@ class DAOArticle
 
         $last_id = $bdd->lastInsertId();
         $article->setId($last_id);
-        return true;
+        return $last_id;
     }
 
     public static function removeArticle(Article $article)
@@ -71,10 +73,19 @@ class DAOArticle
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($articleDataList as $articleData) {
-            $article_list[] = new Article($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+            $article = new Article();
+            $article_list[] = $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
         }
 
         return $article_list;
+    }
+
+    public static function getQuantity(String $id)
+    {
+      $bdd = ConnectBDD::getConnection();
+
+      $req = $bdd->prepare(' WHERE idArticle = :id');
+      $req->bindValue(':id', $article->getId());
     }
 
 }
