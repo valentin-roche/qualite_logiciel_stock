@@ -53,11 +53,18 @@ class Article
     }
     private $description;
 
-    public function __construct($id_param, $name, $description) {
+    public function create($id_param, $name, $description) {
         $this->id = $id_param;
         $this->name = $name;
         $this->description = $description;
     }
+
+    public function createSimple($name, $description) {
+      $this->setName($name);
+      $this->setDescription($description);
+    }
+
+    public function __construct() {}
 
 
 }

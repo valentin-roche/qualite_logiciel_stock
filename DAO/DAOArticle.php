@@ -1,6 +1,7 @@
 <?php
 
 require_once MODEL_ARTICLE;
+require_once CONNECTBDD;
 
 class DAOArticle
 {
@@ -8,7 +9,7 @@ class DAOArticle
 
     public static function getArticle($id)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('SELECT * FROM articles WHERE idArticle = :id');
         $req->bindValue(':id', $id);
@@ -16,14 +17,16 @@ class DAOArticle
         $req->execute();
 
         $data = $req->fetch(PDO::FETCH_ASSOC);
-        return new Article($data['idArticle'], $data['nom'], $data['description']);
+        $ret = new Article();
+        $ret->create($data['idArticle'], $data['nom'], $data['description']);
+        return $ret;
     }
 
     public static function addArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
-        $req = $bdd->prepare('INSERT INTO article(nom, description) VALUES (:nom, :description)');
+        $req = $bdd->prepare('INSERT INTO articles(nom, description) VALUES (:nom, :description)');
         $req->bindValue(':nom', $article->getName());
         $req->bindValue(':description', $article->getDescription());
 
@@ -31,11 +34,12 @@ class DAOArticle
 
         $last_id = $bdd->lastInsertId();
         $article->setId($last_id);
+        return $last_id;
     }
 
     public static function removeArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
         $req->bindValue(':id', $article->getId());
@@ -45,7 +49,7 @@ class DAOArticle
 
     public static function updateArticle(Article $article)
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('UPDATE TABLE article SET nom = :nom, description = :desc WHERE idArticle = :id');
         $req->bindValue(':nom', $article->getName());
@@ -58,9 +62,9 @@ class DAOArticle
 
     public static function getCatalog()
     {
-        $bdd = ConnexionBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
-        $req = $bdd->prepare('SELECT * FROM article');
+        $req = $bdd->prepare('SELECT * FROM articles');
 
         $req->execute();
 
@@ -69,10 +73,26 @@ class DAOArticle
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($articleDataList as $articleData) {
-            $article_list[] = new Article($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+            $article = new Article();
+            $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+            $article_list[] = $article;
         }
 
         return $article_list;
+    }
+
+    public static function getQuantity(String $id)
+    {
+      $bdd = ConnectBDD::getConnection();
+
+      $req = $bdd->prepare('SELECT stock FROM vend WHERE idArticle = :id');
+      $req->bindValue(':id', $id);
+
+      $req->execute();
+
+      $data = $req->fetch(PDO::FETCH_ASSOC);
+
+      return strval($data['stock']);
     }
 
 }

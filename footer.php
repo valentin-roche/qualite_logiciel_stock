@@ -1,5 +1,5 @@
 <?php
-function afficherFooter() {
+function displayFooter() {
 ?>
 
     <footer class="page-footer">

@@ -1,6 +1,7 @@
 <?php
 session_start();
-function afficherHeader($titrePage, $nomCSS) {
+include './config/config.php';
+function displayHeader($titrePage, $nomCSS) {
     ?>
     <!DOCTYPE html>
     <html>
