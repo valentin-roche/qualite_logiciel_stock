@@ -14,7 +14,7 @@ if(isset($id))
     ?>
     <h2><?php echo $article->getName(); ?></h2>
     <p><?php echo $article->getDescription(); ?></p>
-    <p>Quantité : <? echo DAOArticle::getQuantity($article) ?></p>
+    <p>Quantité : <?php echo DAOArticle::getQuantity($article->getId()) ?></p>
     <?php
 }
 else {

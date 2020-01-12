@@ -64,7 +64,7 @@ class DAOArticle
     {
         $bdd = ConnectBDD::getConnection();
 
-        $req = $bdd->prepare('SELECT * FROM article');
+        $req = $bdd->prepare('SELECT * FROM articles');
 
         $req->execute();
 
@@ -74,7 +74,8 @@ class DAOArticle
 
         foreach ($articleDataList as $articleData) {
             $article = new Article();
-            $article_list[] = $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+            $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+            $article_list[] = $article;
         }
 
         return $article_list;
@@ -84,8 +85,14 @@ class DAOArticle
     {
       $bdd = ConnectBDD::getConnection();
 
-      $req = $bdd->prepare(' WHERE idArticle = :id');
-      $req->bindValue(':id', $article->getId());
+      $req = $bdd->prepare('SELECT stock FROM vend WHERE idArticle = :id');
+      $req->bindValue(':id', $id);
+
+      $req->execute();
+
+      $data = $req->fetch(PDO::FETCH_ASSOC);
+
+      return strval($data['stock']);
     }
 
 }
