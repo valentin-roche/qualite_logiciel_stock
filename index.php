@@ -1,9 +1,6 @@
 <?php
-require_once "model/ArticleStub.php";
-require_once "model/RayonStub.php";
-require_once "model/UserStub.php";
-require_once DAO_ARTICLE;
 require_once "header.php";
+require_once DAO_ARTICLE;
 
 displayHeader("Accueil", "");
 ?>
