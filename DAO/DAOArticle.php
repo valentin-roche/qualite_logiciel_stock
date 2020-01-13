@@ -51,7 +51,7 @@ class DAOArticle
     {
         $bdd = ConnectBDD::getConnection();
 
-        $req = $bdd->prepare('UPDATE TABLE article SET nom = :nom, description = :desc WHERE idArticle = :id');
+        $req = $bdd->prepare('UPDATE TABLE articles SET nom = :nom, description = :desc WHERE idArticle = :id');
         $req->bindValue(':nom', $article->getName());
         $req->bindValue(':description', $article->getDescription());
         $req->bindValue(':id', $article->getId());
@@ -93,6 +93,20 @@ class DAOArticle
       $data = $req->fetch(PDO::FETCH_ASSOC);
 
       return strval($data['stock']);
+    }
+
+    public static function getPrice(String $id)
+    {
+      $bdd = ConnectBDD::getConnection();
+
+      $req = $bdd->prepare('SELECT prix FROM vend WHERE idArticle = :id');
+      $req->bindValue(':id', $id);
+
+      $req->execute();
+
+      $data = $req->fetch(PDO::FETCH_ASSOC);
+
+      return strval($data['prix']);
     }
 
 }

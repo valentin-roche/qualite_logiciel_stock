@@ -41,6 +41,28 @@ require_once CONNECTBDD;
       $req->execute();
   }
 
+  public static function updateArticle($qtt, $price, $idArticle, $idRayon) {
+      $db = ConnectBDD::getConnection();
+
+      $req = $db->prepare('UPDATE TABLE vend SET stock=:quantity, prix=:price, idRayon=:idRayon WHERE idArticle=:idArticle)');
+      $req->bindValue(':quantity', $qtt);
+      $req->bindValue(':price', $price);
+      $req->bindValue(':idArticle', $idArticle);
+      $req->bindValue(':idRayon', $idRayon);
+
+      $req->execute();
+  }
+
+  public static function isSold($idArticle, $idRayon) {
+    $db = ConnectBDD::getConnection();
+
+    $req = $db->prepare('SELECT * FROM rayon NATURAL JOIN vend NATURAL JOIN articles WHERE idArticle = '.$idArticle.' AND idRayon = '.$idRayon);
+
+    $req->execute();
+
+    return empty($req->fetchAll(PDO::FETCH_ASSOC));
+  }
+
   function __construct() {}
 }
 
