@@ -3,7 +3,6 @@ class Article
 {
     private $id;
     private $name;
-
     /**
      * @return mixed
      */
@@ -11,7 +10,6 @@ class Article
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
@@ -19,7 +17,6 @@ class Article
     {
         $this->id = $id;
     }
-
     /**
      * @return mixed
      */
@@ -27,7 +24,6 @@ class Article
     {
         return $this->name;
     }
-
     /**
      * @param mixed $name
      */
@@ -35,7 +31,6 @@ class Article
     {
         $this->name = $name;
     }
-
     /**
      * @return mixed
      */
@@ -43,7 +38,6 @@ class Article
     {
         return $this->description;
     }
-
     /**
      * @param mixed $description
      */
@@ -52,12 +46,14 @@ class Article
         $this->description = $description;
     }
     private $description;
-
-    public function __construct($id_param, $name, $description) {
+    public function create($id_param, $name, $description) {
         $this->id = $id_param;
         $this->name = $name;
         $this->description = $description;
     }
-
-
+    public function createSimple($name, $description) {
+      $this->setName($name);
+      $this->setDescription($description);
+    }
+    public function __construct() {}
 }
