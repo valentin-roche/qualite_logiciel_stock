@@ -44,13 +44,17 @@ require_once CONNECTBDD;
   public static function updateArticle($qtt, $price, $idArticle, $idRayon) {
       $db = ConnectBDD::getConnection();
 
-      $req = $db->prepare('UPDATE TABLE vend SET stock=:quantity, prix=:price, idRayon=:idRayon WHERE idArticle=:idArticle)');
-      $req->bindValue(':quantity', $qtt);
-      $req->bindValue(':price', $price);
-      $req->bindValue(':idArticle', $idArticle);
-      $req->bindValue(':idRayon', $idRayon);
+      $req = $db->prepare('UPDATE vend
+        SET stock = :quantity,
+            prix = :price,
+            idRayon = :idRayon
+        WHERE idArticle = :idArticle ');
+      $req->bindParam(':quantity', $qtt);
+      $req->bindParam(':price', $price);
+      $req->bindParam(':idArticle', $idArticle);
+      $req->bindParam(':idRayon', $idRayon);
 
-      $req->execute();
+      return $req->execute();
   }
 
   public static function isSold($idArticle, $idRayon) {

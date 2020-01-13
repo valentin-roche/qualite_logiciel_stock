@@ -33,7 +33,7 @@ if($formAction and isset($_POST["name"])) {
       }
       break;
     case 'modifyArticle':
-      $id = modifyArticle($_POST["name"], $_POST["desc"], $_POST["rayon"], $_POST["quantity"], $_POST["price"]);
+      $id = modifyArticle($_POST["name"], $_POST["desc"], $_POST["rayon"], $_POST["quantity"], $_POST["price"], $_GET["articleId"]);
       if (isset($id)) {
         header('Location: http://qualite-logiciel-stock/article.php?idArticle='.$id);
         exit();
@@ -52,10 +52,13 @@ function addArticle($name, $desc, $idRayon, $qtt, $price) {
   return $idArticle;
 }
 
-function modifyArticle($name, $desc, $idRayon, $qtt, $price) {
+function modifyArticle($name, $desc, $idRayon, $qtt, $price, $articleId) {
   $article = new Article();
-  $article->createSimple($name, $desc);
-  $idArticle = DAOArticle::updateArticle($article);
-  DAORayon::updateArticle($qtt, $price, $idArticle, $idRayon);
-  return $idArticle;
+  $article->create($articleId, $name, $desc);
+  if(DAOArticle::updateArticle($article)) {
+    if (DAORayon::updateArticle($qtt, $price, $articleId, $idRayon)) {
+      return $articleId;
+    }
+  }
+  return null;
 }
