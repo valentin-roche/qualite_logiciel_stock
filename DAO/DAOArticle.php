@@ -67,4 +67,4 @@ class DAOArticle
       $data = $req->fetch(PDO::FETCH_ASSOC);
       return strval($data['stock']);
     }
-}
+} 
