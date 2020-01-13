@@ -21,6 +21,7 @@ define("MODEL_RAYON", "model/Rayon.php");
 //define("CONTROLLER_RAYON", "controller/RayonController.php");
 
 define("CONNECTBDD", "DAO/ConnectBDD.php");
+define("CONTROLLER_SEARCH", 'controller/SearchController.php');
 
 
 //$dsn = 'mysql:dbname=;host=lookingpywroot.mysql.db';
