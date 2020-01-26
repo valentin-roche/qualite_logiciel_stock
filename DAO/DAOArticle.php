@@ -5,7 +5,9 @@ require_once CONNECTBDD;
 
 class DAOArticle
 {
+
     public function __construct(){}
+
     public static function getArticle($id)
     {
         $bdd = ConnectBDD::getConnection();
@@ -19,6 +21,7 @@ class DAOArticle
         return $ret;
     }
 
+<<<<<<< Updated upstream
     public static function getArticleByName($name) {
       $bdd = ConnectBDD::getConnection();
 
@@ -32,6 +35,8 @@ class DAOArticle
       $ret->create($data['idArticle'], $data['nom'], $data['description']);
       return $ret;
     }
+=======
+>>>>>>> Stashed changes
     public static function addArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
@@ -44,17 +49,24 @@ class DAOArticle
         $article->setId($last_id);
         return $last_id;
     }
+
     public static function removeArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
+<<<<<<< Updated upstream
       
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
+=======
+        $req = $bdd->prepare('DELETE FROM articles WHERE idArticle = :id');
+>>>>>>> Stashed changes
         $req->bindValue(':id', $article->getId());
         $req->execute();
     }
+
     public static function updateArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
+<<<<<<< Updated upstream
       
         $req = $bdd->prepare("UPDATE articles SET nom = :nom, description = :description WHERE idArticle = :articleId");
         $req->bindValue(':nom', $article->getName(), PDO::PARAM_STR);
@@ -64,7 +76,15 @@ class DAOArticle
         $failed = $req->execute();
 
         return $failed;
+=======
+        $req = $bdd->prepare('UPDATE articles SET nom = :nom, description = :description WHERE idArticle = :id');
+        $req->bindValue(':nom', $article->getName());
+        $req->bindValue(':description', $article->getDescription());
+        $req->bindValue(':id', $article->getId());
+        $req->execute();
+>>>>>>> Stashed changes
     }
+
     public static function getCatalog()
     {
         $bdd = ConnectBDD::getConnection();
@@ -75,6 +95,7 @@ class DAOArticle
         $article_list = [];
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($articleDataList as $articleData) {
+            echo $articleData['nom'];
             $article = new Article();
             $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
             $article_list[] = $article;
