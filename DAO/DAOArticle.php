@@ -1,4 +1,4 @@
-  
+
 <?php
 require_once MODEL_ARTICLE;
 require_once CONNECTBDD;
@@ -9,7 +9,7 @@ class DAOArticle
     public static function getArticle($id)
     {
         $bdd = ConnectBDD::getConnection();
-      
+
         $req = $bdd->prepare('SELECT * FROM articles WHERE idArticle = :id');
         $req->bindValue(':id', $id);
         $req->execute();
@@ -47,7 +47,7 @@ class DAOArticle
     public static function removeArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
-      
+
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
         $req->bindValue(':id', $article->getId());
         $req->execute();
@@ -55,7 +55,7 @@ class DAOArticle
     public static function updateArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
-      
+
         $req = $bdd->prepare("UPDATE articles SET nom = :nom, description = :description WHERE idArticle = :articleId");
         $req->bindValue(':nom', $article->getName(), PDO::PARAM_STR);
         $req->bindValue(':description', $article->getDescription(), PDO::PARAM_STR);
@@ -70,7 +70,7 @@ class DAOArticle
         $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('SELECT * FROM articles');
-      
+
         $req->execute();
         $article_list = [];
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -108,6 +108,21 @@ class DAOArticle
       $data = $req->fetch(PDO::FETCH_ASSOC);
 
       return strval($data['prix']);
+    }
+
+    public static function searchArticle(String $qs) {
+      $bdd = ConnectBDD::getConnection();
+
+      $req = $bbd->prepare('SELECT * FROM articles WHERE nom LIKE %:qs%');
+      $req->bindValue(':qs', $qs);
+
+      $req->execute();
+
+      $data = $req->fetch(PDO::FETCH_ASSOC);
+      $ret = new Article();
+      $ret->create($data['idArticle'], $data['nom'], $data['description']);
+      
+      return $ret;
     }
 
 }

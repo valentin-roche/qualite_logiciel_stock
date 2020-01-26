@@ -17,9 +17,9 @@ function displayHeader($titrePage, $nomCSS) {
 
     <body>
       <a href="http://qualite-logiciel-stock"><h1>Decathlux</h1></a>
-      <form action="recherche.php" method="get">
+      <form action="search.php" method="get">
         <input type="text" name="q">
-        <input type="submit" name="recherche" value="Rechercher">
+        <input type="submit" name="recherche">
       </form>
     <?php
 }
