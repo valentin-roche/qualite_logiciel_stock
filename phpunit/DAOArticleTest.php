@@ -54,19 +54,17 @@ class DAOArticleTest extends TestCase
 		$this->assertSame(count($catalog), 3);
 	}
 
-	/** 
-	* @depends testGetCatalog
-	
-	public function testRemoveArticle($id) {
+	public function testRemoveArticle() {
 		$catalog = DAOArticle::getCatalog();
-		echo count($catalog);
-		echo $id;
-		DAOArticle::removeArticle(new Article($id, '', ''));
+		$this->assertSame(count($catalog), 3);
+		
+		foreach($catalog as $key) {
+			DAOArticle::removeArticle($key);
+		}
+
 		$catalog = DAOArticle::getCatalog();
-		echo count($catalog);
-		//$this->assertSame(count($catalog), 2);
-		$this->assertTrue(true);
-	}**/
+		$this->assertSame(count($catalog), 0);
+	}
 
 	/**
 	* @after
