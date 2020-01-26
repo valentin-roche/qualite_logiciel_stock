@@ -1,22 +1,29 @@
 <?php
 
-
 class Rayon
 {
     private $id;
-    private $nom;
+    private $name;
     private $respo;
 
+    public function __construct() {}
+
+    public function createSimple($name, $respo)
+    {
+        $this->name = $name;
+        $this->respo = $respo;
+    }
+
     /**
-     * Rayon constructor.
+     * Initialize
      * @param $id
-     * @param $nom
+     * @param $name
      * @param $respo
      */
-    public function __construct($id, $nom, $respo)
+    public function create($id, $name, $respo)
     {
         $this->id = $id;
-        $this->nom = $nom;
+        $this->name = $name;
         $this->respo = $respo;
     }
 
@@ -39,17 +46,17 @@ class Rayon
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $name
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     }
 
     /**

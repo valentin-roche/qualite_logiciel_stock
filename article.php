@@ -1,19 +1,26 @@
 <?php
-include './config/config.php';
 include "header.php";
 require_once DAO_ARTICLE;
 
-if(isset($_GET["idArticle"])) $idArticle = $_GET["idArticle"];
+if(isset($_GET["idArticle"])) $id = $_GET["idArticle"];
 
 $article = null;
-afficherHeader("Article", "");
+displayHeader("Article", "");
 
-if($idArticle)
+
+if(isset($id))
 {
-    $article = DAOArticle::getArticle($idArticle);
+    $article = DAOArticle::getArticle($id);
     ?>
-    <h2><?php echo $article->getName() ?></h2>
-    <p><?php echo $article->getDescription() ?></p>
+    <h2><?php echo $article->getName(); ?></h2>
+    <p><?php echo $article->getDescription(); ?></p>
+    <p>Quantité : <?php echo DAOArticle::getQuantity($article->getId()) ?></p>
+    <p>Prix : <?php echo DAOArticle::getPrice($article->getId()) ?></p>
+    <a href="addArticle.php?navAction=modifyArticle&articleId=<?php echo $article->getId(); ?>">
+      <button type="button" name="Modifier">
+        Modifier
+      </button>
+    </a>
     <?php
 }
 else {
