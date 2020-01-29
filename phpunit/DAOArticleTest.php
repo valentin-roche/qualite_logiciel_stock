@@ -14,7 +14,8 @@ class DAOArticleTest extends TestCase
 	/**
 	* @before
 	**/
-	public function setUpDB() {
+	public function setUpDB() 
+	{
 		$article = new Article();
 		$article->createSimple('Article', 'Some article');
 		$this->_id = DAOArticle::addArticle($article); 
@@ -24,13 +25,15 @@ class DAOArticleTest extends TestCase
 		DAOArticle::addArticle($article); 
 	}
 
-	public function testGetArticle() {
+	public function testGetArticle() 
+	{
 		$article = DAOArticle::getArticle($this->_id);
 		$this->assertSame($article->getName(), 'Article');
 		$this->assertSame($article->getDescription(), 'Some article');
 	}
 
-	public function testAddArticle() {
+	public function testAddArticle() 
+	{
 		$article = new Article();
 		$article->create(0, 'TestArticle', 'An article');
 		$id = DAOArticle::addArticle($article);
@@ -40,7 +43,8 @@ class DAOArticleTest extends TestCase
 		$this->assertSame($article->getDescription(), 'An article');	
 	}
 	
-	public function testUpdateArticle() {
+	public function testUpdateArticle() 
+	{
 		$article = new Article();
 		$article->create($this->_id, 'UpdatedArticle', 'Still an article');
 		DAOArticle::updateArticle($article);
@@ -49,21 +53,21 @@ class DAOArticleTest extends TestCase
 		$this->assertSame($updated_article->getDescription(), 'Still an article');
 	}
 	
-	public function testGetCatalog() {
+	public function testGetCatalog() 
+	{
 		$catalog = DAOArticle::getCatalog();
 		$this->assertSame(count($catalog), 3);
 	}
 
-	public function testRemoveArticle() {
-		$catalog = DAOArticle::getCatalog();
-		$this->assertSame(count($catalog), 3);
-		
-		foreach($catalog as $key) {
-			DAOArticle::removeArticle($key);
-		}
+	public function testRemoveArticle() 
+	{
+
+		$article = new Article();
+		$article->create($this->_id, '', '');
+		DAOArticle::removeArticle($article);
 
 		$catalog = DAOArticle::getCatalog();
-		$this->assertSame(count($catalog), 0);
+		$this->assertSame(count($catalog), 2);
 	}
 
 	/**
