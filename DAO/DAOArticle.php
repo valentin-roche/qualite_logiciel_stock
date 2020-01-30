@@ -113,16 +113,19 @@ class DAOArticle
     public static function searchArticle(String $qs) {
       $bdd = ConnectBDD::getConnection();
 
-      $req = $bbd->prepare('SELECT * FROM articles WHERE nom LIKE %:qs%');
+      $req = $bdd->prepare("SELECT * FROM articles WHERE nom LIKE CONCAT('%',:qs,'%')");
       $req->bindValue(':qs', $qs);
 
       $req->execute();
 
-      $data = $req->fetch(PDO::FETCH_ASSOC);
-      $ret = new Article();
-      $ret->create($data['idArticle'], $data['nom'], $data['description']);
-      
-      return $ret;
+      $article_list = [];
+      $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($articleDataList as $articleData) {
+          $article = new Article();
+          $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+          $article_list[] = $article;
+      }
+      return $article_list;
     }
 
 }
