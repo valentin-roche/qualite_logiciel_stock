@@ -5,7 +5,9 @@ require_once CONNECTBDD;
 
 class DAOArticle
 {
+
     public function __construct(){}
+
     public static function getArticle($id)
     {
         $bdd = ConnectBDD::getConnection();
@@ -18,7 +20,7 @@ class DAOArticle
         $ret->create($data['idArticle'], $data['nom'], $data['description']);
         return $ret;
     }
-
+  
     public static function getArticleByName($name) {
       $bdd = ConnectBDD::getConnection();
 
@@ -32,6 +34,7 @@ class DAOArticle
       $ret->create($data['idArticle'], $data['nom'], $data['description']);
       return $ret;
     }
+  
     public static function addArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
@@ -44,14 +47,17 @@ class DAOArticle
         $article->setId($last_id);
         return $last_id;
     }
+
     public static function removeArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
+
         $req->bindValue(':id', $article->getId());
         $req->execute();
     }
+
     public static function updateArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
@@ -65,6 +71,7 @@ class DAOArticle
 
         return $failed;
     }
+
     public static function getCatalog()
     {
         $bdd = ConnectBDD::getConnection();
@@ -75,6 +82,7 @@ class DAOArticle
         $article_list = [];
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
         foreach ($articleDataList as $articleData) {
+            echo $articleData['nom'];
             $article = new Article();
             $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
             $article_list[] = $article;
