@@ -12,6 +12,6 @@ Procédure un peu inexacte pour le moment et dont les commandes sont uniquement 
 1) S'assurer d'avoir installé un stack AMP et que tout les composants sont fonctionnels.
 2) Placer le dossier contenant le projet dans le répertoire **www**
 3) Ajouter un fichier de configuration pour créer un **virtualhost** apache dans le dossier /etc/apache2/config (suivre [ce tutoriel](https://www.ostechnix.com/configure-apache-virtual-hosts-ubuntu-part-1/) a partir de la 4ème partie).
-4) Modifier le fichier de configuration appelé **config.php** situé dans le répertoire config du projet afin de permettre une connexion à la base de données. 
+4) Modifier le fichier de configuration appelé **config.php** situé dans le répertoire config du projet afin de permettre une connexion à la base de données. Pour se faire créez un utilisateur dans votre bdd ayant les droits sur les données et entrez ses informations dans le fichier de configuration. 
 5) Redémarrer le service apache :
 `sudo service apache2 restart`

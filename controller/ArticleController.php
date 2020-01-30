@@ -15,7 +15,7 @@ if(isset($formNav)) {
       break;
     case 'modifyArticle':
       $formAction = 'modifyArticle';
-      displayModForm();
+      displayModForm($_GET['articleId']);
       break;
   }
 }
@@ -33,7 +33,13 @@ if($formAction and isset($_POST["name"])) {
       }
       break;
     case 'modifyArticle':
-      echo "TODO";
+      $id = modifyArticle($_POST["name"], $_POST["desc"], $_POST["rayon"], $_POST["quantity"], $_POST["price"], $_GET["articleId"]);
+      if (isset($id)) {
+        header('Location: http://qualite-logiciel-stock/article.php?idArticle='.$id);
+        exit();
+      } else {
+        echo "Echec";
+      }
       break;
   }
 }
@@ -44,4 +50,15 @@ function addArticle($name, $desc, $idRayon, $qtt, $price) {
   $idArticle = DAOArticle::addArticle($article);
   DAORayon::addArticle($qtt, $price, $idArticle, $idRayon);
   return $idArticle;
+}
+
+function modifyArticle($name, $desc, $idRayon, $qtt, $price, $articleId) {
+  $article = new Article();
+  $article->create($articleId, $name, $desc);
+  if(DAOArticle::updateArticle($article)) {
+    if (DAORayon::updateArticle($qtt, $price, $articleId, $idRayon)) {
+      return $articleId;
+    }
+  }
+  return null;
 }

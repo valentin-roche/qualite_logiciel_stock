@@ -12,7 +12,6 @@ function displayAddForm() {
   } else {
     $formAction = 'addArticle';
   }
-}
 ?>
 <form method="POST" id="formArticle">
   <input type="text" name="name" placeholder="Nom de l'article" value="<?php if(isset($_POST["name"])) echo $_POST["name"] ?>">
@@ -33,3 +32,44 @@ function displayAddForm() {
 
   <input type="submit" value="Ajouter l'article" name="<?php echo $formAction?>"/>
 </form>
+<?php
+}
+
+function displayModForm($articleId) {
+  if(isset($_POST["nom"])) {
+    $formAction = 'modifyArticle';
+  } else {
+    $formAction = 'addArticle';
+  }
+
+  $article = DAOArticle::getArticle($articleId);
+?>
+<form method="POST" id="formArticle">
+  <input type="text" name="name" placeholder="Nom de l'article" value="<?php echo $article->getName(); ?>">
+  <input type="text" name="desc" placeholder="Description de l'article" value="<?php echo $article->getDescription(); ?>">
+  <label for="quantity">Quantité (au moins 1) :</label>
+  <input type="number" name="quantity" value="<?php echo DAOArticle::getQuantity($article->getId()) ?>" min="1" >
+  <label for="quantity">Prix (au moins 1€) :</label>
+  <input type="number" name="price" value="<?php echo DAOArticle::getPrice($article->getId()) ?>" min="1" >
+  <label for="rayon">Rayon :</label>
+  <select name="rayon">
+    <?php
+    foreach (DAORayon::getRayons() as $rData) {
+    ?>
+    <option value="<?php echo $rData->getId(); ?>"
+      <?php
+        if(DAORayon::isSold($article->getId(), $rData->getId())) {
+          echo "selected";
+        }
+       ?>>
+      <?php echo $rData->getName(); ?>
+    </option>
+    <?php }
+    ?>
+  </select>
+
+  <input type="submit" value="Modifier l'article" name="<?php echo $formAction?>"/>
+</form>
+<?php
+}
+?>
