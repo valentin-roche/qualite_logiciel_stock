@@ -1,4 +1,4 @@
-  
+
 <?php
 require_once MODEL_ARTICLE;
 require_once CONNECTBDD;
@@ -11,7 +11,7 @@ class DAOArticle
     public static function getArticle($id)
     {
         $bdd = ConnectBDD::getConnection();
-      
+
         $req = $bdd->prepare('SELECT * FROM articles WHERE idArticle = :id');
         $req->bindValue(':id', $id);
         $req->execute();
@@ -20,8 +20,7 @@ class DAOArticle
         $ret->create($data['idArticle'], $data['nom'], $data['description']);
         return $ret;
     }
-
-<<<<<<< Updated upstream
+  
     public static function getArticleByName($name) {
       $bdd = ConnectBDD::getConnection();
 
@@ -35,8 +34,7 @@ class DAOArticle
       $ret->create($data['idArticle'], $data['nom'], $data['description']);
       return $ret;
     }
-=======
->>>>>>> Stashed changes
+  
     public static function addArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
@@ -53,12 +51,9 @@ class DAOArticle
     public static function removeArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
-<<<<<<< Updated upstream
-      
+
         $req = $bdd->prepare('DELETE FROM article WHERE idArticle = :id');
-=======
-        $req = $bdd->prepare('DELETE FROM articles WHERE idArticle = :id');
->>>>>>> Stashed changes
+
         $req->bindValue(':id', $article->getId());
         $req->execute();
     }
@@ -66,8 +61,7 @@ class DAOArticle
     public static function updateArticle(Article $article)
     {
         $bdd = ConnectBDD::getConnection();
-<<<<<<< Updated upstream
-      
+
         $req = $bdd->prepare("UPDATE articles SET nom = :nom, description = :description WHERE idArticle = :articleId");
         $req->bindValue(':nom', $article->getName(), PDO::PARAM_STR);
         $req->bindValue(':description', $article->getDescription(), PDO::PARAM_STR);
@@ -76,13 +70,6 @@ class DAOArticle
         $failed = $req->execute();
 
         return $failed;
-=======
-        $req = $bdd->prepare('UPDATE articles SET nom = :nom, description = :description WHERE idArticle = :id');
-        $req->bindValue(':nom', $article->getName());
-        $req->bindValue(':description', $article->getDescription());
-        $req->bindValue(':id', $article->getId());
-        $req->execute();
->>>>>>> Stashed changes
     }
 
     public static function getCatalog()
@@ -90,7 +77,7 @@ class DAOArticle
         $bdd = ConnectBDD::getConnection();
 
         $req = $bdd->prepare('SELECT * FROM articles');
-      
+
         $req->execute();
         $article_list = [];
         $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -129,6 +116,24 @@ class DAOArticle
       $data = $req->fetch(PDO::FETCH_ASSOC);
 
       return strval($data['prix']);
+    }
+
+    public static function searchArticle(String $qs) {
+      $bdd = ConnectBDD::getConnection();
+
+      $req = $bdd->prepare("SELECT * FROM articles WHERE nom LIKE CONCAT('%',:qs,'%')");
+      $req->bindValue(':qs', $qs);
+
+      $req->execute();
+
+      $article_list = [];
+      $articleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($articleDataList as $articleData) {
+          $article = new Article();
+          $article->create($articleData['idArticle'], $articleData['nom'], $articleData['description']);
+          $article_list[] = $article;
+      }
+      return $article_list;
     }
 
 }

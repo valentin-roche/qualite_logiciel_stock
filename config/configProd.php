@@ -1,5 +1,5 @@
 <?php
-error_reporting( E_ALL );
+error_reporting( 0 );
 ini_set('display_errors', 1);
 define("SGBD", "mysql");
 define("NOM_BD", "decathlux");
