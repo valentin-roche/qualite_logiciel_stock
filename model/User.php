@@ -1,37 +1,35 @@
 <?php
 
-require __DIR__."/../DAO/DAOUser.php";
-
 class User
 {
     private $id;
-    private $identifiant;
     private $passwd;
-    private $nom;
-    private $prenom;
+    private $name;
+    private $surname;
     private $mail;
     private $idRole;
     private $idRayon;
 
+    public function __construct() {}
+
     /**
-     * User constructor.
+     * User instantiator.
      * @param $id
      * @param $identifiant
      * @param $passwd
-     * @param $nom
-     * @param $prenom
+     * @param $name
+     * @param $surname
      * @param $mail
      */
-    public function __construct($id, $identifiant, $passwd, $nom, $prenom, $mail)
+    public function create($id, $passwd, $name, $surname, $mail, $roleId, $idRayon)
     {
         $this->id = $id;
-        $this->identifiant = $identifiant;
         $this->passwd = $passwd;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->mail = $mail;
-        $this->idRole = DAOUser::getRole($id);
-        $this->idRayon = DAOUser::getRayon($id);
+        $this->idRole = $roleId
+        $this->idRayon = $idRayon;
     }
 
     /**
@@ -53,22 +51,6 @@ class User
     /**
      * @return mixed
      */
-    public function getIdentifiant()
-    {
-        return $this->identifiant;
-    }
-
-    /**
-     * @param mixed $identifiant
-     */
-    public function setIdentifiant($identifiant)
-    {
-        $this->identifiant = $identifiant;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPasswd()
     {
         return $this->passwd;
@@ -85,33 +67,33 @@ class User
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getname()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $name
      */
-    public function setNom($nom)
+    public function setname($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     }
 
     /**
      * @return mixed
      */
-    public function getPrenom()
+    public function getsurname()
     {
-        return $this->prenom;
+        return $this->surname;
     }
 
     /**
-     * @param mixed $prenom
+     * @param mixed $surname
      */
-    public function setPrenom($prenom)
+    public function setsurname($surname)
     {
-        $this->prenom = $prenom;
+        $this->surname = $surname;
     }
 
     /**

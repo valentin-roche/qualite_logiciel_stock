@@ -23,10 +23,17 @@ function displayHeader($titrePage, $nomCSS) {
         } ?>">
         <input type="submit" name="recherche">
       </form>
-
+      <?php
+      if(isset($_SESSION['mail'])) { ?>
+        <p><?php echo $_SESSION['name'] + " " + $_SESSION['surname'] ?>
+        <form action="<?php CONTROLEUR_CONNEXION ?>" method="post">
+          <input type="submit" name="deconnection" value = "Se deconnecter">
+        </form>
+      <?php } else {?>
       <a href="connection.php">
         <button>Se connecter</button>
       </a>
     <?php
+  }
 }
 ?>
