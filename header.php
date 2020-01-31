@@ -23,6 +23,10 @@ function displayHeader($titrePage, $nomCSS) {
         } ?>">
         <input type="submit" name="recherche">
       </form>
+
+      <a href="connection.php">
+        <button>Se connecter</button>
+      </a>
     <?php
 }
 ?>

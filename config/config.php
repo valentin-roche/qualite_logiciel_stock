@@ -19,6 +19,7 @@ define("MODEL_RAYON", "model/Rayon.php");
 
 define("CONNECTBDD", "DAO/ConnectBDD.php");
 define("CONTROLLER_SEARCH", 'controller/SearchController.php');
+define("CONNECTION_CONTROLLER", 'controller/ConnectionController.php')
 
 //$dsn = 'mysql:dbname=;host=lookingpywroot.mysql.db';
 //$user = 'siteLeoPub';

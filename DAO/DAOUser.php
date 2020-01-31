@@ -13,4 +13,9 @@ class DAOUser
     {
         return 0;
     }
+
+    //TODO
+    public static function getUserByName() {
+        
+    }
 }
