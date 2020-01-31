@@ -20,21 +20,31 @@ class DAOUser
 
     //TODO
     public static function getUserByMail($mail) {
-      $bdd = ConnectBDD::getConnection();
+      $db = ConnectBDD::getConnection();
 
-      $req = $bdd->prepare('SELECT * FROM utilisateur WHERE mail = :mail');
+      $req = $db->prepare('SELECT * FROM utilisateur WHERE mail = :mail');
       $req->bindValue(':mail', $mail);
 
       $req->execute();
 
       $data = $req->fetch(PDO::FETCH_ASSOC);
       $ret = new User();
-      $ret->create();
+      $ret->create($data['idUtilisateur'], $data['mdp'], $data['nom'], $data['prenom'], $data['mail'], $data['idRayon'], $data['idRole']);
       return $ret;
     }
 
     //TODO
-    public static function checkConnection($login, $password) {
+    public static function checkConnection($mail, $password) {
+      $db = ConnectBDD::getConnection();
 
+      $req = $db->prepare('SELECT mail, mdp FROM utilisateur WHERE mail=:mail AND mdp=:mdp');
+      $req->bindValue(':mail', $mail);
+      $req->bindValue(':mdp', User::cryptPass($password));
+      $req->execute();
+      $count = count($req->fetch(PDO::FETCH_ASSOC));
+      if($count > 1){
+        return true;
+      }
+      return false;
     }
 }
