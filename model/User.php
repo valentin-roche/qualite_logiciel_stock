@@ -67,7 +67,7 @@ class User
     /**
      * @return mixed
      */
-    public function getname()
+    public function getName()
     {
         return $this->name;
     }
@@ -75,7 +75,7 @@ class User
     /**
      * @param mixed $name
      */
-    public function setname($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -83,7 +83,7 @@ class User
     /**
      * @return mixed
      */
-    public function getsurname()
+    public function getSurname()
     {
         return $this->surname;
     }
@@ -91,7 +91,7 @@ class User
     /**
      * @param mixed $surname
      */
-    public function setsurname($surname)
+    public function setSurname($surname)
     {
         $this->surname = $surname;
     }
@@ -144,7 +144,7 @@ class User
         $this->idRayon = $idRayon;
     }
 
-    public static function cryptPass($pwd) {
+    function cryptPass($pwd) {
       $encrypt_method = "AES-256-CBC";
       $secret_key = 'e9058ab198f6908f702111b0c0fb5b36f99d00554521886c40e2891b349dc7a1';
       $secret_iv = '17550e2bb9ff2c26dcce8ed178e326202cc9c67f16b79470767f01839a062249';
@@ -160,7 +160,7 @@ class User
       return $output;
     }
 
-    public static function decryptPass($pwd) {
+    function decryptPass($pwd) {
       $encrypt_method = "AES-256-CBC";
       $secret_key = 'e9058ab198f6908f702111b0c0fb5b36f99d00554521886c40e2891b349dc7a1';
       $secret_iv = '17550e2bb9ff2c26dcce8ed178e326202cc9c67f16b79470767f01839a062249';

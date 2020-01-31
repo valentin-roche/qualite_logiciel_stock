@@ -39,7 +39,7 @@ class DAOUser
 
       $req = $db->prepare('SELECT mail, mdp FROM utilisateur WHERE mail=:mail AND mdp=:mdp');
       $req->bindValue(':mail', $mail);
-      $req->bindValue(':mdp', User::cryptPass($password));
+      $req->bindValue(':mdp',new User()->cryptPass($password));
       $req->execute();
       $count = count($req->fetch(PDO::FETCH_ASSOC));
       if($count > 1){

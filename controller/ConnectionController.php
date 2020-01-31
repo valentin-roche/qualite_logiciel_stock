@@ -20,6 +20,11 @@ if(isset($_POST['connexion'])){
                 $user = UserDAO::getUserByMail($mail);
                 $_SESSION['mail'] = $mail;
                 $_SESSION['password'] = $user->getPassword();
+                $_SESSION['name'] = $user->getName();
+                $_SESSION['surname'] = $user->getSurname();
+                $_SESSION['id'] = $user->getId();
+                $_SESSION['idRayon'] = $user->getIdRayon();
+                $_SESSION['idRole'] = $user->getIdRole();
                 header( 'Location: index.php' );
             }
         }
@@ -28,8 +33,8 @@ if(isset($_POST['connexion'])){
 if(isset($_POST['deconnexion'])){
   session_start();
   $_SESSION = array();
-  if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
+    if (ini_get("session.use_cookies")) {
     setcookie(session_name(), '', time() - 42000,
         $params["path"], $params["domain"],
         $params["secure"], $params["httponly"]
