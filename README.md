@@ -22,7 +22,7 @@ Procédure un peu inexacte pour le moment et dont les commandes sont uniquement 
 2) Placer le dossier contenant le projet dans le répertoire **www**
 3) Ajouter un fichier de configuration pour créer un **virtualhost** apache dans le dossier /etc/apache2/config (suivre [ce tutoriel](https://www.ostechnix.com/configure-apache-virtual-hosts-ubuntu-part-1/) a partir de la 4ème partie) et appeler le virtualhost **qualite-logiciel-stock**. 
 5) Redémarrer le service apache :
-`sudo service apache2 restart`
+`sudo service apache2 restart` ou `sudo systemctl restart apache2`
 6) Vérifier la connexion en suivant ce lien : http://qualite-logiciel-stock.
 
 # Utilisation de l'application
