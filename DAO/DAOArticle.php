@@ -20,7 +20,7 @@ class DAOArticle
     }
 
     public static function getArticleByName($name) {
-      $bdd = ConnectBDD::getConnection();
+        $bdd = ConnectBDD::getConnection();
 
       $req = $bdd->prepare('SELECT * FROM articles WHERE nom = :name');
       $req->bindValue(':name', $name);

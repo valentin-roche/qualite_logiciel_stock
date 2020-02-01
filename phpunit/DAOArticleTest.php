@@ -63,6 +63,15 @@ class DAOArticleTest extends TestCase
 		}
 	}
 
+	public function testGetArticleByName() 
+	{
+		for($i=0; $i<3; $i++) {
+			$article = DAOArticle::getArticleByName($this->_articles[$i]->getName());
+			$this->assertSame($article->getId(), $this->_articles[$i]->getId());
+			$this->assertSame($article->getDescription(), $this->_articles[$i]->getDescription());	
+		}
+	}
+
 	public function testAddArticle() 
 	{
 		$article = new Article();
