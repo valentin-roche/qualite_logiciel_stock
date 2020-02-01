@@ -50,7 +50,6 @@ class DAOArticle
       
         $req = $bdd->prepare('DELETE FROM articles WHERE idArticle = :id');
         $req->bindValue(':id', $article->getId());
-        echo $article->getId();
         $req->execute();
     }
     public static function updateArticle(Article $article)
