@@ -17,7 +17,6 @@ define("CONTROLLER_ARTICLE", "controller/ArticleController.php");
 
 define("DAO_RAYON", "DAO/DAORayon.php");
 define("MODEL_RAYON", "model/Rayon.php");
-//define("CONTROLLER_RAYON", "controller/RayonController.php");
 
 define("DAO_ROLE", "DAO/DAORoles.php");
 define("MODEL_ROLE", "model/Role.php");
@@ -28,9 +27,5 @@ define("CONNECTION_CONTROLLER", 'controller/ConnectionController.php');
 
 define("ADMIN", 2);
 define("EMPLOYEE", 1);
-define("CUSTOMER", 0);
-//$dsn = 'mysql:dbname=;host=lookingpywroot.mysql.db';
-//$user = 'siteLeoPub';
-//$password = 'looking4partyAdmin';
-//define("CONTROLEUR_CONNEXION", $prefixePrive."controleur/controleurConnexion.php");
+define("CUSTOMER", 0);*
 ?>
