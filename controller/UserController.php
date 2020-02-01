@@ -23,7 +23,7 @@ if(isset($formNav)) {
 if($formAction and isset($_POST["name"])) {
   switch ($formAction) {
     case 'addUser':
-      $id = addUser($_POST["password"], $_POST["name"], $_POST["surname"], $_POST["mail"], $_POST["role"]);
+      $id = addUser($_POST["password"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["role"]);
       if (isset($id)) {
         header('Location: http://qualite-logiciel-stock/');
         exit();
@@ -45,9 +45,9 @@ if($formAction and isset($_POST["name"])) {
 
 function addUser($passwd, $name, $surname, $mail, $roleId) {
   $user = new User();
-  $user->create($passwd, $name, $surname, $mail, $roleId);
+  $user->createsimple($passwd, $name, $surname, $mail, $roleId);
   $idUser = DAOUser::addUser($user);
-  return $idUser
+  return $idUser;
 }
 
  ?>

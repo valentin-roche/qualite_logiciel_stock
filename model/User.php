@@ -38,7 +38,7 @@ class User
      * @param $surname
      * @param $mail
      */
-    public function create($passwd, $name, $surname, $mail, $roleId)
+    public function createsimple($passwd, $name, $surname, $mail, $roleId)
     {
         $this->passwd = $passwd;
         $this->name = $name;
@@ -154,7 +154,7 @@ class User
       //iv encryption
       $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
-      $output = openssl_encrypt($password, $encrypt_method, $key, 0, $iv);
+      $output = openssl_encrypt($pwd, $encrypt_method, $key, 0, $iv);
       $output = base64_encode($output);
       return $output;
     }
@@ -170,7 +170,7 @@ class User
       //iv encryption
       $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
-      $output = openssl_decrypt(base64_decode($password), $encrypt_method, $key, 0, $iv);
+      $output = openssl_decrypt(base64_decode($pwd), $encrypt_method, $key, 0, $iv);
       return $output;
     }
 }

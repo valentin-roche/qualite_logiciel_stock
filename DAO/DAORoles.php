@@ -18,6 +18,7 @@ class DAORoles
     $role_list = [];
     $roleDataList = $req->fetchAll(PDO::FETCH_ASSOC);
     foreach ($roleDataList as $roleData) {
+        echo $roleData;
         $role = new Role();
         $role->create($roleData['idRole'], $roleData['libelle']);
         $role_list[] = $role;

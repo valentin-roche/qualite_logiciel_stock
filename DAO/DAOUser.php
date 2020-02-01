@@ -32,7 +32,9 @@ class DAOUser
 
       $req = $db->prepare('SELECT mail, mdp FROM utilisateur WHERE mail=:mail AND mdp=:mdp');
       $req->bindValue(':mail', $mail);
-      $req->bindValue(':mdp',new User()->cryptPass($password));
+      $nusr = new User();
+      $pwd = $nusr->cryptPass($password);
+      $req->bindValue(':mdp', $pwd);
       $req->execute();
       $count = count($req->fetch(PDO::FETCH_ASSOC));
       if($count > 1){
@@ -44,7 +46,7 @@ class DAOUser
     public static function addUser(User $usr) {
       $db = ConnectBDD::getConnection();
 
-      $req = $db->prepare('INSERT INTO utilisateur(mdp, nom, prenom, mail, idRole) VALUES :mdp, :nom, :prenom, :mail, :idRole');
+      $req = $db->prepare("INSERT INTO utilisateur(mdp, nom, prenom, mail, idRole) VALUES (:mdp, :nom, :prenom, :mail, :idRole)");
       $req->bindValue(':mdp', $usr->cryptPass($usr->getPasswd()));
       $req->bindValue(':nom', $usr->getName());
       $req->bindValue(':prenom', $usr->getsurname());
@@ -52,7 +54,7 @@ class DAOUser
       $req->bindValue(':idRole', $usr->getIdRole());
 
       $req->execute();
-      $last_id = $bdd->lastInsertId();
+      $last_id = $db->lastInsertId();
       $usr->setId($last_id);
       return $last_id;
     }
