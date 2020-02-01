@@ -27,7 +27,6 @@ class DAOUser
       return $ret;
     }
 
-    //TODO
     public static function checkConnection($mail, $password) {
       $db = ConnectBDD::getConnection();
 
@@ -40,5 +39,21 @@ class DAOUser
         return true;
       }
       return false;
+    }
+
+    public static function addUser(User $usr) {
+      $db = ConnectBDD::getConnection();
+
+      $req = $db->prepare('INSERT INTO utilisateur(mdp, nom, prenom, mail, idRole) VALUES :mdp, :nom, :prenom, :mail, :idRole');
+      $req->bindValue(':mdp', $usr->cryptPass($usr->getPasswd()));
+      $req->bindValue(':nom', $usr->getName());
+      $req->bindValue(':prenom', $usr->getsurname());
+      $req->bindValue(':mail', $usr->getMail());
+      $req->bindValue(':idRole', $usr->getIdRole());
+
+      $req->execute();
+      $last_id = $bdd->lastInsertId();
+      $usr->setId($last_id);
+      return $last_id;
     }
 }
