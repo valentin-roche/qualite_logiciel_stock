@@ -3,8 +3,8 @@ require_once MODEL_ARTICLE;
 require_once DAO_ARTICLE;
 require_once DAO_RAYON;
 
-if(isset($_POST['formAction'])) $formAction = $_POST['formAction'];
-if(isset($_GET['navAction'])) $formNav = $_GET['navAction'];
+if(isset($_POST['formAction'])) { $formAction = $_POST['formAction'] };
+if(isset($_GET['navAction'])) { $formNav = $_GET['navAction'] };
 
 //Select which form to display
 if(isset($formNav)) {
