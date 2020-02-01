@@ -1,7 +1,4 @@
 <?php
-require_once DAO_USER;
-require_once MODEL_USER;
-
 if(isset($_POST['connection'])){
     if(empty($_POST['mail'])){
         echo "Le champ mail est vide.";
@@ -11,6 +8,8 @@ if(isset($_POST['connection'])){
             echo "Le champ mot de passe est vide.";
         }
         else{
+            require_once DAO_USER;
+            require_once MODEL_USER;
             $mail = $_POST['mail'];
             $password = $_POST['password'];
             if(!DAOUser::checkConnection($mail, $password)){
@@ -41,6 +40,6 @@ if(isset($_POST['deconnection'])){
     );
   }
   session_destroy();
-  header( 'Location: index.php' );
+  header( 'Location: ../index.php' );
 }
 ?>
