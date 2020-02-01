@@ -9,7 +9,7 @@ define("MDP_USAGER_BD", "test_web");
 
 define("DAO_USER", "DAO/DAOUser.php");
 define("MODEL_USER", "model/User.php");
-//define("CONTROLLER_USER", "controller/UserController.php");
+define("CONTROLLER_USER", "controller/UserController.php");
 
 define("DAO_ARTICLE", "DAO/DAOArticle.php");
 define("MODEL_ARTICLE", "model/Article.php");

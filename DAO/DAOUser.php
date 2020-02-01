@@ -13,12 +13,6 @@ class DAOUser
     }
 
     //TODO
-    static function getRayon($user_id)
-    {
-        return 0;
-    }
-
-    //TODO
     public static function getUserByMail($mail) {
       $db = ConnectBDD::getConnection();
 
@@ -29,7 +23,7 @@ class DAOUser
 
       $data = $req->fetch(PDO::FETCH_ASSOC);
       $ret = new User();
-      $ret->create($data['idUtilisateur'], $data['mdp'], $data['nom'], $data['prenom'], $data['mail'], $data['idRayon'], $data['idRole']);
+      $ret->create($data['idUtilisateur'], $data['mdp'], $data['nom'], $data['prenom'], $data['mail'], $data['idRole']);
       return $ret;
     }
 

@@ -8,7 +8,6 @@ class User
     private $surname;
     private $mail;
     private $idRole;
-    private $idRayon;
 
     public function __construct() {}
 
@@ -21,15 +20,31 @@ class User
      * @param $surname
      * @param $mail
      */
-    public function create($id, $passwd, $name, $surname, $mail, $roleId, $idRayon)
+    public function create($id, $passwd, $name, $surname, $mail, $roleId)
     {
         $this->id = $id;
         $this->passwd = $passwd;
         $this->name = $name;
         $this->surname = $surname;
         $this->mail = $mail;
-        $this->idRole = $roleId
-        $this->idRayon = $idRayon;
+        $this->idRole = $roleId;
+    }
+
+    /**
+     * User instantiator.
+     * @param $identifiant
+     * @param $passwd
+     * @param $name
+     * @param $surname
+     * @param $mail
+     */
+    public function create($passwd, $name, $surname, $mail, $roleId)
+    {
+        $this->passwd = $passwd;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->mail = $mail;
+        $this->idRole = $roleId;
     }
 
     /**
@@ -126,22 +141,6 @@ class User
     public function setIdRole($idRole)
     {
         $this->idRole = $idRole;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIdRayon()
-    {
-        return $this->idRayon;
-    }
-
-    /**
-     * @param string $idRayon
-     */
-    public function setIdRayon($idRayon)
-    {
-        $this->idRayon = $idRayon;
     }
 
     function cryptPass($pwd) {

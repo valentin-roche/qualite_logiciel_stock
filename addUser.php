@@ -17,16 +17,6 @@ function displayAddForm() {
   <input type="email" name="email" value="<?php if(isse($_POST["email"])) echo $_POST["email"] ?>">
   <input type="password" name="password" value="<?php if(isset($_POST["password"])) echo $_POST["password"] ?>">
 
-  <label for="rayon">Rayon :</label>
-  <select name="rayon">
-    <?php
-    foreach (DAORayon::getRayons() as $rData) {
-    ?>
-    <option value="<?php echo $rData->getId(); ?>"><?php echo $rData->getName(); ?></option>
-    <?php }
-    ?>
-  </select>
-
   <label for="role">Role :</label>
   <select name="role">
     <?php
