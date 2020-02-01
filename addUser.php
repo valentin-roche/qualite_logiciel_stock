@@ -36,4 +36,8 @@ function displayAddForm() {
     <?php }
     ?>
   </select>
-  <input type="submit" name="" value="">
+  <input type="submit" name="<?php echo $formAction ?>" value="Ajouter l'utilisateur">
+</form>
+<?php
+}
+?>
