@@ -16,6 +16,8 @@ define("CONTROLLER_ARTICLE", "controller/ArticleController.php");
 define("DAO_RAYON", "DAO/DAORayon.php");
 define("MODEL_RAYON", "model/Rayon.php");
 //define("CONTROLLER_RAYON", "controller/RayonController.php");
+define("DAO_ROLE", "DAO/DAORoles.php");
+define("MODEL_ROLE", "model/Role.php");
 
 define("CONNECTBDD", "DAO/ConnectBDD.php");
 define("CONTROLLER_SEARCH", 'controller/SearchController.php');
