@@ -6,6 +6,15 @@ require_once CONTROLLER_USER;
 require_once DAO_ROLE;
 
 function displayAddForm() {
+  if(isset($_SESSION["idRole"])) {
+    if($_SESSION["idRole"] != ADMIN) {
+        echo "Vous devez etre administrateur pour accéder à ces fonctionnalités.";
+        return 0;
+    }
+  } else {
+    echo "Vous devez etre administrateur pour accéder à ces fonctionnalités.";
+    return 0;
+  }
   if(isset($_POST["nom"])) {
     $formAction = 'modifyUser';
   } else {

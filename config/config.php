@@ -24,8 +24,11 @@ define("MODEL_ROLE", "model/Role.php");
 
 define("CONNECTBDD", "DAO/ConnectBDD.php");
 define("CONTROLLER_SEARCH", 'controller/SearchController.php');
-define("CONNECTION_CONTROLLER", 'controller/ConnectionController.php')
+define("CONNECTION_CONTROLLER", 'controller/ConnectionController.php');
 
+define("ADMIN", 2);
+define("EMPLOYEE", 1);
+define("CUSTOMER", 0);
 //$dsn = 'mysql:dbname=;host=lookingpywroot.mysql.db';
 //$user = 'siteLeoPub';
 //$password = 'looking4partyAdmin';
