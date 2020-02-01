@@ -35,4 +35,8 @@ Procédure un peu inexacte pour le moment et dont les commandes sont uniquement 
 | test.vendeur@test.com | testvendeur  | vendeur        |
 
 ## Utilisation de l'application
-Pour l'utilisation de l'application des vidéos sont disponnibles [ici]((ressources/videos).
+Pour l'utilisation de l'application des vidéos sont disponnibles [ici](ressources/videos).
+
+# Contacts
+Valentin Roche : valentin.roche@etu.univ-tours.fr
+Florent Dumoulin : florent.dumoulin@etu.univ-tours.fr
