@@ -9,7 +9,7 @@ Cet utilisateur doit pouvoir se connecter en local si la base de données est su
 Pour se faire, adapter la ligne **NOM_HOTE_BD** dans le fichier de configuration **configProd.php** en fonction de la situation.
 
 ## Création base de données
-Dans le projet vous trouverez [le script de creation](ressources/decathlux.sql) de la base de données, contenant un minimum d'enregistrements pour le bon fonctionnement (2 comptes utilisateurs et des rayons). Il suffit d'exécuter ce script avec votre SGBD pour créer la base de données du site
+Dans le projet vous trouverez [le script de creation](https://github.com/valentin-roche/qualite_logiciel_stock/blob/master/resources/decathlux.sql) de la base de données, contenant un minimum d'enregistrements pour le bon fonctionnement (2 comptes utilisateurs et des rayons). Il suffit d'exécuter ce script avec votre SGBD pour créer la base de données du site
 
 # Mise en place avec WAMP
 1) Placer le dossier contenant le projet dans le répertoire **www** (dans le répertoire d'installation de WAMP).
@@ -28,10 +28,11 @@ Procédure un peu inexacte pour le moment et dont les commandes sont uniquement 
 # Utilisation de l'application
 ## Comptes utilisateur
 2 comptes sont disponnibles initialement, un administrateur et un vendeur.
-| #Login                | #Mot de passe | #Role          |
-|-----------------------|---------------|----------------|
-| test.manager@test.com | testmgr       | administrateur |
-| test.vendeur@test.com | testvendeur   | vendeur        |
+
+| Login                 | Mot de passe | Role           |
+|-----------------------|--------------|----------------|
+| test.manager@test.com | testmgr      | administrateur |
+| test.vendeur@test.com | testvendeur  | vendeur        |
 
 ## Utilisation de l'application
 Pour l'utilisation de l'application des vidéos sont disponnibles [ici]((ressources/videos).
