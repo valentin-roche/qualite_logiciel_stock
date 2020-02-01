@@ -1,7 +1,8 @@
 <?php
 require_once DAO_USER;
 require_once MODEL_USER;
-if(isset($_POST['connexion'])){
+
+if(isset($_POST['connection'])){
     if(empty($_POST['mail'])){
         echo "Le champ mail est vide.";
     }
@@ -17,20 +18,19 @@ if(isset($_POST['connexion'])){
             }
             else{
                 session_start();
-                $user = UserDAO::getUserByMail($mail);
+                $user = DAOUser::getUserByMail($mail);
                 $_SESSION['mail'] = $mail;
-                $_SESSION['password'] = $user->getPassword();
+                $_SESSION['password'] = $user->getPasswd();
                 $_SESSION['name'] = $user->getName();
                 $_SESSION['surname'] = $user->getSurname();
                 $_SESSION['id'] = $user->getId();
-                $_SESSION['idRayon'] = $user->getIdRayon();
                 $_SESSION['idRole'] = $user->getIdRole();
                 header( 'Location: index.php' );
             }
         }
     }
 }
-if(isset($_POST['deconnexion'])){
+if(isset($_POST['deconnection'])){
   session_start();
   $_SESSION = array();
     $params = session_get_cookie_params();
