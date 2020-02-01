@@ -1,37 +1,50 @@
 <?php
 
-require __DIR__."/../DAO/DAOUser.php";
-
 class User
 {
     private $id;
-    private $identifiant;
     private $passwd;
-    private $nom;
-    private $prenom;
+    private $name;
+    private $surname;
     private $mail;
     private $idRole;
-    private $idRayon;
+
+    public function __construct() {}
 
     /**
-     * User constructor.
+     * User instantiator.
      * @param $id
      * @param $identifiant
      * @param $passwd
-     * @param $nom
-     * @param $prenom
+     * @param $name
+     * @param $surname
      * @param $mail
      */
-    public function __construct($id, $identifiant, $passwd, $nom, $prenom, $mail)
+    public function create($id, $passwd, $name, $surname, $mail, $roleId)
     {
         $this->id = $id;
-        $this->identifiant = $identifiant;
         $this->passwd = $passwd;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
+        $this->name = $name;
+        $this->surname = $surname;
         $this->mail = $mail;
-        $this->idRole = DAOUser::getRole($id);
-        $this->idRayon = DAOUser::getRayon($id);
+        $this->idRole = $roleId;
+    }
+
+    /**
+     * User instantiator.
+     * @param $identifiant
+     * @param $passwd
+     * @param $name
+     * @param $surname
+     * @param $mail
+     */
+    public function createsimple($passwd, $name, $surname, $mail, $roleId)
+    {
+        $this->passwd = $passwd;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->mail = $mail;
+        $this->idRole = $roleId;
     }
 
     /**
@@ -53,22 +66,6 @@ class User
     /**
      * @return mixed
      */
-    public function getIdentifiant()
-    {
-        return $this->identifiant;
-    }
-
-    /**
-     * @param mixed $identifiant
-     */
-    public function setIdentifiant($identifiant)
-    {
-        $this->identifiant = $identifiant;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPasswd()
     {
         return $this->passwd;
@@ -85,33 +82,33 @@ class User
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $name
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     }
 
     /**
      * @return mixed
      */
-    public function getPrenom()
+    public function getSurname()
     {
-        return $this->prenom;
+        return $this->surname;
     }
 
     /**
-     * @param mixed $prenom
+     * @param mixed $surname
      */
-    public function setPrenom($prenom)
+    public function setSurname($surname)
     {
-        $this->prenom = $prenom;
+        $this->surname = $surname;
     }
 
     /**
@@ -146,19 +143,34 @@ class User
         $this->idRole = $idRole;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdRayon()
-    {
-        return $this->idRayon;
+    function cryptPass($pwd) {
+      $encrypt_method = "AES-256-CBC";
+      $secret_key = 'e9058ab198f6908f702111b0c0fb5b36f99d00554521886c40e2891b349dc7a1';
+      $secret_iv = '17550e2bb9ff2c26dcce8ed178e326202cc9c67f16b79470767f01839a062249';
+
+      // hash
+      $key = hash('sha256', $secret_key);
+
+      //iv encryption
+      $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+      $output = openssl_encrypt($pwd, $encrypt_method, $key, 0, $iv);
+      $output = base64_encode($output);
+      return $output;
     }
 
-    /**
-     * @param string $idRayon
-     */
-    public function setIdRayon($idRayon)
-    {
-        $this->idRayon = $idRayon;
+    function decryptPass($pwd) {
+      $encrypt_method = "AES-256-CBC";
+      $secret_key = 'e9058ab198f6908f702111b0c0fb5b36f99d00554521886c40e2891b349dc7a1';
+      $secret_iv = '17550e2bb9ff2c26dcce8ed178e326202cc9c67f16b79470767f01839a062249';
+
+      // hash
+      $key = hash('sha256', $secret_key);
+
+      //iv encryption
+      $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+      $output = openssl_decrypt(base64_decode($pwd), $encrypt_method, $key, 0, $iv);
+      return $output;
     }
 }

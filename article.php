@@ -16,12 +16,15 @@ if(isset($id))
     <p><?php echo $article->getDescription(); ?></p>
     <p>Quantité : <?php echo DAOArticle::getQuantity($article->getId()) ?></p>
     <p>Prix : <?php echo DAOArticle::getPrice($article->getId()) ?></p>
+    <?php
+    if(isset($_SESSION['name'])) {?>
     <a href="addArticle.php?navAction=modifyArticle&articleId=<?php echo $article->getId(); ?>">
       <button type="button" name="Modifier">
         Modifier
       </button>
     </a>
     <?php
+  }
 }
 else {
     ?>
