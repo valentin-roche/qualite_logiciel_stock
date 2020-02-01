@@ -2,7 +2,7 @@
 include "header.php";
 require_once DAO_ARTICLE;
 
-if(isset($_GET["idArticle"])) $id = $_GET["idArticle"];
+if(isset($_GET["idArticle"])) { $id = $_GET["idArticle"] };
 
 $article = null;
 displayHeader("Article", "");
