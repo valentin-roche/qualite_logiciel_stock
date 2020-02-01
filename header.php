@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './config/config.php';
+include './config/configProd.php';
 function displayHeader($titrePage, $nomCSS) {
     ?>
     <!DOCTYPE html>

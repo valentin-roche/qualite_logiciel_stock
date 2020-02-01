@@ -27,5 +27,5 @@ define("CONNECTION_CONTROLLER", 'controller/ConnectionController.php');
 
 define("ADMIN", 2);
 define("EMPLOYEE", 1);
-define("CUSTOMER", 0);*
+define("CUSTOMER", 0);
 ?>
